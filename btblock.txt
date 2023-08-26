@@ -1,0 +1,11 @@
+# Disable Bluetooth
+def disable_bluetooth():
+    key_path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\ActionCenter\QuickActions\All\SystemSettings_Device_BluetoothQuickAction"
+    try:
+        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_SET_VALUE) as key:
+            winreg.SetValueEx(key, "Start", 0, winreg.REG_DWORD, 1)  # Set Start to 4 to disable
+        print("Bluetooth disabled.")
+    except Exception as e:
+        print("Error:", e)
+
+disable_bluetooth()
